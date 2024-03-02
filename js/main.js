@@ -27,7 +27,7 @@ function displayMenuItems(menuItems) {
           <article class="menu-item">
             <a href=${item.href}>
               <img
-                src=${item.img}
+                src="${item.img}"
                 class="photo"
                 alt="${item.title}"
               />

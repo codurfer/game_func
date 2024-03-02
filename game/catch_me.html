@@ -7,6 +7,7 @@
       body {
         display: flex;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
       }
       p {
@@ -15,8 +16,8 @@
       }
       .view {
         position: relative;
-        width: 380px;
-        height: 600px;
+        width: 340px;
+        height: 450px;
         border: solid gray;
       }
       .btn {
@@ -76,7 +77,7 @@
   </head>
   <body>
     <h1>사라지는 버튼 잡아라!</h1>
-    <p>30초 동안 많은 버튼을 누르세요!!</p>
+    <p>15초 동안 많은 버튼을 누르세요!!</p>
     <div class="view"></div>
     <button class="start">시작하기</button>
     <span class="time"></span>
@@ -104,7 +105,7 @@
         sec = 0;
         mil = 0;
         e.target.classList.add('end');
-        timeInter = setInterval(timeLimit, 10);
+        timeInter = setInterval(timeLimit, 5);
         gameInter = setInterval(startGame, 400);
       });
 

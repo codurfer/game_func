@@ -70,7 +70,7 @@ let menu = [
     category: 'function',
     href: './functio/count_check.html',
     img: '../img/count_check.jpg',
-    desc: `마우스 클릭 한번으로 숫자를 세보세요!`,
+    desc: `편하게 숫자를 세보세요!`,
   },
   {
     id: 4,
@@ -78,7 +78,7 @@ let menu = [
     category: 'game',
     href: './game/catch_me.html',
     img: '../img/catch_me.jpg',
-    desc: `30초 동안 많은 버튼을 누르는 간단한 게임!`,
+    desc: `15초 동안 많은 버튼을 누르는 간단한 게임!`,
   },
   {
     id: 5,
@@ -110,6 +110,6 @@ let menu = [
     category: 'function',
     href: 'functio/random_box.html',
     img: '../img/random_box.jpg',
-    desc: `5개의 박스 중 당첨은 하나!!`,
+    desc: `6개의 박스 중 당첨은 하나!!`,
   },
 ];

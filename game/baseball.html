@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 40dvh;
+      }
+      .number-content {
+        display: none;
+      }
+      .number-content.active {
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        margin: 5px;
+        line-height: 45px;
+      }
+      .result {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      .num {
+        margin: 10px;
+        width: 50px;
+        height: 50px;
+        border: none;
+        font-weight: bold;
+        color: white;
+        background-color: rgb(233, 67, 67);
+      }
+      .num.ans {
+        margin: 10px;
+        width: 50px;
+        height: 50px;
+        border: none;
+        font-weight: bold;
+        color: white;
+        background-color: rgb(86, 160, 220);
+      }
+      .user {
+        display: none;
+      }
+      .user.active {
+        display: block;
+        text-align: center;
+        width: 60px;
+      }
+      .start.hide {
+        display: none;
+      }
+      .start:hover {
+        background-color: rgb(145, 154, 120);
+      }
+      .check.hide {
+        display: none;
+      }
+      .btn {
+        display: block;
+        margin: 10px;
+        width: 70px;
+        font-weight: bold;
+        color: white;
+        height: 30px;
+        border: none;
+        border-radius: 5%;
+        background-color: rgb(119, 154, 22);
+      }
+      .check {
+        background-color: rgb(27, 86, 212);
+      }
+      .check:hover {
+        background-color: rgb(83, 119, 198);
+      }
+      .back {
+        background-color: rgb(139, 139, 139);
+      }
+      .back:hover {
+        background-color: rgb(84, 84, 84);
+      }
+      .btn-container {
+        display: flex;
+        float: left;
+      }
+
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>야구볼게임</h1>
+    <div class="number-content">
+      <div class="num fir">?</div>
+      <div class="num sec">?</div>
+      <div class="num thr">?</div>
+    </div>
+    <input class="user" type="number" oninput="maxlen(this, 3)" />
+    <div class="btn-container">
+      <button class="btn start">시작</button>
+      <button class="btn check hide">확인</button>
+      <button class="btn back" onclick="location.href = '../index.html'">
+        뒤로
+      </button>
+    </div>
+    <span class="result"></span>
+    <ol class="list"></ol>
+    <script>
+      const view = document.querySelector('.number-content');
+      const nums = document.querySelectorAll('.num');
+      const start = document.querySelector('.start');
+      const check = document.querySelector('.check');
+      const user = document.querySelector('.user');
+      const result = document.querySelector('.result');
+      const list = document.querySelector('.list');
+      let setNum = [];
+      let userNum = [];
+      let challeNum = [];
+      let count = 0;
+      let strike = 0;
+      let ball = 0;
+
+      for (let i = 0; setNum.length < 3; i++) {
+        let randomNum = Math.floor(Math.random() * 9) + 1;
+        setNum.push(randomNum);
+        checkRandom();
+      }
+
+      function checkRandom() {
+        setNum = setNum.filter((item, index) => {
+          return setNum.indexOf(item) === index;
+        });
+      }
+
+      start.addEventListener('click', (e) => {
+        start.classList.add('hide');
+        view.classList.add('active');
+        user.classList.add('active');
+        check.classList.remove('hide');
+      });
+
+      check.addEventListener('click', (e) => {
+        if (user.value.length === 3) {
+          userNum = user.value.split('');
+          checkNum();
+          if (strike === 3) {
+            nums.forEach((num) => {
+              num.classList.add('ans');
+              if (num.classList.contains('fir')) {
+                num.innerText = `${setNum[0]}`;
+              } else if (num.classList.contains('sec')) {
+                num.innerText = `${setNum[1]}`;
+              } else if (num.classList.contains('thr')) {
+                num.innerText = `${setNum[2]}`;
+              }
+            });
+            result.innerText = `정답입니다!`;
+            reGame();
+          }
+        }
+      });
+
+      // back.addEventListener('click', (e) => {
+      //   window.location.href = '../index.html';
+      // });
+
+      function maxlen(num, maxlen) {
+        if (num.value.length > maxlen) {
+          num.value = num.value.substr(0, maxlen);
+        }
+      }
+
+      function checkNum() {
+        count++;
+        strike = 0;
+        ball = 0;
+        if (count === 11) {
+          result.innerHTML = '10번의 기회를 다 사용했습니다.';
+          reGame();
+        } else {
+          for (let i = 0; i < userNum.length; i++) {
+            if (Number(userNum[i]) === setNum[i]) {
+              strike++;
+            } else if (
+              userNum[i] != setNum[i] &&
+              setNum.includes(Number(userNum[i]))
+            ) {
+              ball++;
+            }
+          }
+          challeNum.push(
+            ` ${userNum.join('')} = 스트라이크: ${strike} / 볼: ${ball}`
+          );
+          const creLi = document.createElement('li');
+          creLi.textContent = challeNum[0];
+          list.appendChild(creLi);
+          challeNum = [];
+          user.value = '';
+        }
+      }
+
+      function reGame() {
+        check.innerText = `다시하기`;
+        user.classList.remove('active');
+        check.addEventListener('click', (e) => {
+          location.reload();
+        });
+      }
+    </script>
+  </body>
+</html>

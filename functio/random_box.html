@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>랜덤 박스</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .btn {
+        margin: 20px;
+        width: 80px;
+        height: 80px;
+        border: none;
+        font-weight: bold;
+        font-size: 15px;
+        background-color: rgb(224, 93, 11);
+        border-radius: 15%;
+        color: white;
+      }
+      .btn:hover {
+        background-color: rgb(78, 207, 91);
+      }
+      .reStart {
+        display: none;
+      }
+      .reStart.end {
+        margin: 20px;
+        display: block;
+        border: none;
+        border-radius: 8%;
+        text-align: center;
+        font-weight: bold;
+        width: 100px;
+        height: 40px;
+        color: white;
+        background-color: #961b34;
+      }
+      .reStart:hover {
+        background-color: #c62545;
+      }
+      .result {
+        margin: 20px;
+      }
+      .back {
+        margin: 20px;
+        display: block;
+        border: none;
+        border-radius: 8%;
+        text-align: center;
+        font-weight: bold;
+        width: 100px;
+        height: 40px;
+        color: white;
+        background-color: #5c5c5c;
+      }
+      .back:hover {
+        background-color: #818181;
+      }
+      .btn-container {
+        display: flex;
+        float: left;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>랜덤 박스</h1>
+    <span class="info">박스를 고르세요!</span>
+    <div class="random">
+      <button class="btn" value="1"></button>
+      <button class="btn" value="2"></button>
+      <button class="btn" value="3"></button>
+      <button class="btn" value="4"></button>
+      <button class="btn" value="5"></button>
+    </div>
+    <span class="result"></span>
+    <div class="btn-container">
+      <button class="reStart"></button>
+      <button class="back" onclick="location.href = '../index.html'">
+        뒤로가기
+      </button>
+    </div>
+    <script>
+      const btns = document.querySelectorAll('.btn');
+      const result = document.querySelector('.result');
+      const reStart = document.querySelector('.reStart');
+      let number = randomNumber();
+
+      btns.forEach((btn) => {
+        btn.innerHTML = `?`;
+        btn.addEventListener('click', (e) => {
+          const target = e.target;
+          const val = e.target.value;
+          if (Number(val) === number) {
+            btns.forEach((btn) => {
+              btn.disabled = true;
+              btn.innerHTML = `꽝`;
+              target.disabled = true;
+              target.innerHTML = `당첨`;
+              result.textContent = '축하합니다! 당첨이에요!';
+              target.style.backgroundColor = `rgb(62, 158, 231)`;
+              reStart.classList.add('end');
+              reStart.innerHTML = `다시 하기`;
+            });
+          } else {
+            btns.forEach((btn) => {
+              reStart.classList.add('end');
+              reStart.innerHTML = `다시 하기`;
+              btn.disabled = true;
+              btn.innerHTML = `꽝`;
+              target.style.backgroundColor = `rgb(62, 158, 231)`;
+              if (Number(btn.value) === number) {
+                btn.innerHTML = `당첨`;
+                result.textContent = '꽝이 나왔네요..';
+              }
+            });
+          }
+        });
+      });
+
+      reStart.addEventListener('click', (e) => {
+        location.reload();
+      });
+
+      function randomNumber() {
+        let num = Math.floor(Math.random() * 5) + 1;
+        return num;
+      }
+    </script>
+  </body>
+</html>

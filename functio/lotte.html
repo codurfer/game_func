@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로또 추첨</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 90dvh;
+      }
+      h1 {
+        margin: 0px;
+      }
+      .info {
+        margin-top: -10px;
+        margin-bottom: 15px;
+      }
+      .circle {
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        line-height: 55px;
+        margin: 30px;
+      }
+      .num {
+        width: 60px;
+        height: 60px;
+        margin: 2px;
+        border-radius: 50%;
+        font-size: 30px;
+        font-weight: bold;
+        background-color: yellowgreen;
+      }
+      .btn {
+        width: 90px;
+        height: 50px;
+        font-weight: bold;
+        border: none;
+        border-radius: 10%;
+        color: white;
+        background-color: tan;
+      }
+      .start {
+        background-color: cornflowerblue;
+      }
+      .start:hover {
+        background-color: rgb(41, 110, 239);
+      }
+      .reset {
+        background-color: grey;
+      }
+      .reset:hover {
+        background-color: rgb(186, 186, 186);
+      }
+      .back {
+        background-color: rgb(189, 68, 68);
+      }
+      .back:hover {
+        background-color: rgb(179, 17, 17);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>로또 추첨을 시작합니다!</h1>
+    <div class="circle">
+      <div class="num arr-1">?</div>
+      <div class="num arr-2">?</div>
+      <div class="num arr-3">?</div>
+      <div class="num arr-4">?</div>
+      <div class="num arr-5">?</div>
+      <div class="num arr-6">?</div>
+    </div>
+    <div class="info"></div>
+    <div class="btns">
+      <button class="btn start">추첨하기</button>
+      <button class="btn reset" onclick="location.reload()">초기화</button>
+      <button class="btn back" onclick="location.href = '../index.html'">
+        뒤로가기
+      </button>
+    </div>
+    <script>
+      const info = document.querySelector('.info');
+      const circle = document.querySelector('.circle');
+      const start = document.querySelector('.start');
+      const nums = document.querySelectorAll('.circle .num');
+      let count = 0;
+
+      start.addEventListener('click', (e) => {
+        const className = e.currentTarget.classList;
+        if (className.contains('start')) {
+          count++;
+          let lottoSet = new Set();
+          for (let i = 0; lottoSet.size != 6; i++) {
+            let number = parseInt(Math.random() * 45 + 1);
+            lottoSet.add(number);
+          }
+          const showup = Array.from(lottoSet);
+          showup.sort((a, b) => a - b);
+          info.innerText = `${count}번째, 추첨번호는 위와 같습니다.`;
+
+          nums.forEach((item, index) => {
+            if (showup[index] <= 10) {
+              item.style.backgroundColor = 'rgb(250, 196, 0)';
+            } else if (showup[index] <= 20) {
+              item.style.backgroundColor = 'rgb(104, 200, 242)';
+            } else if (showup[index] <= 30) {
+              item.style.backgroundColor = 'rgb(255, 114, 113)';
+            } else if (showup[index] <= 40) {
+              item.style.backgroundColor = 'rgb(170, 170, 170)';
+            } else if (showup[index] <= 45) {
+              item.style.backgroundColor = 'rgb(176, 216, 65)';
+            }
+            item.innerHTML = showup[index];
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

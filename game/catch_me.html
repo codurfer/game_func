@@ -1,0 +1,158 @@
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>버튼 누르기!</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      p {
+        margin: 0;
+        margin-bottom: 20px;
+      }
+      .view {
+        position: relative;
+        width: 800px;
+        height: 500px;
+        border: solid gray;
+      }
+      .btn {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        margin: 10px;
+        border: none;
+        border-radius: 50%;
+        color: white;
+        font-weight: bold;
+        background-color: rgb(35, 208, 156);
+      }
+      .btn:hover {
+        background-color: rgb(25, 153, 115);
+      }
+      .start {
+        margin: 15px;
+        display: block;
+        width: 80px;
+        height: 50px;
+        border: none;
+        border-radius: 5%;
+        background-color: rgb(199, 237, 74);
+      }
+      .start:hover {
+        background-color: rgb(201, 229, 108);
+      }
+      .start.end {
+        display: none;
+      }
+      .time {
+        margin: 20px;
+        font-size: 25px;
+      }
+      .result {
+        display: none;
+      }
+      .result.show {
+        display: block;
+        font-weight: bold;
+      }
+      .back {
+        margin: 15px;
+        display: block;
+        width: 80px;
+        height: 50px;
+        border: none;
+        border-radius: 5%;
+        color: white;
+        background-color: rgb(110, 110, 109);
+      }
+      .back:hover {
+        background-color: rgb(56, 56, 56);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>사라지는 버튼 잡아라!</h1>
+    <p>30초 동안 많은 버튼을 누르세요!!</p>
+    <div class="view"></div>
+    <button class="start">시작하기</button>
+    <span class="time"></span>
+    <span class="result"></span>
+    <button class="back" onclick="location.href = '../index.html'">
+      뒤로가기
+    </button>
+    <script>
+      const start = document.querySelector('.start');
+      const time = document.querySelector('.time');
+      const result = document.querySelector('.result');
+      let timeInter;
+      let gameInter;
+      let sec = 0;
+      let mil = 0;
+      let count = 0;
+
+      function xy(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      start.addEventListener('click', (e) => {
+        result.classList.remove('show');
+        count = 0;
+        sec = 0;
+        mil = 0;
+        e.target.classList.add('end');
+        timeInter = setInterval(timeLimit, 10);
+        gameInter = setInterval(startGame, 400);
+      });
+
+      function timeLimit() {
+        if (mil === 100) {
+          mil = 0;
+          console.log(count);
+          if (sec == 30) {
+            clearInterval(timeInter);
+            clearInterval(gameInter);
+            result.innerHTML = `30초 동안 누른 버튼의 수는 ${count}개 입니다.`;
+            start.classList.remove('end');
+            start.textContent = '다시시작';
+            result.classList.add('show');
+          } else {
+            sec++;
+          }
+        } else {
+          mil++;
+        }
+        time.innerHTML = `남은시간: ${30 - sec}초`;
+      }
+
+      function startGame() {
+        const view = document.querySelector('.view');
+        const widthView = view.offsetWidth;
+        const hightView = view.offsetHeight;
+        const creBtn = document.createElement('button');
+
+        let x = xy(0, widthView - 100);
+        let y = xy(0, hightView - 100);
+
+        creBtn.classList.add('btn');
+        creBtn.textContent = '눌러줘!';
+        creBtn.style.left = x + 'px';
+        creBtn.style.top = y + 'px';
+
+        view.appendChild(creBtn);
+
+        creBtn.addEventListener('click', (e) => {
+          count++;
+          creBtn.remove();
+        });
+
+        const timeout = setTimeout(function () {
+          creBtn.remove();
+        }, 1300);
+      }
+    </script>
+  </body>
+</html>

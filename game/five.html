@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>다섯고개</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .btn-container {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+      }
+      .btn {
+        margin: 10px;
+        height: 30px;
+      }
+      .user {
+        margin: 10px;
+        width: 140px;
+        height: 30px;
+        text-align: center;
+      }
+      .btn {
+        background-color: rgb(14, 124, 112);
+        border: none;
+        color: white;
+        font-weight: bold;
+      }
+      .btn:hover {
+        background-color: rgb(72, 142, 134);
+      }
+      .btn.active {
+        background-color: transparent;
+        border: none;
+        color: black;
+        font-weight: bold;
+      }
+      .result {
+        margin: 15px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>무엇을 말하고 있을까요?</h1>
+    <span class="view"></span>
+    <div class="btn-container">
+      <button class="btn fir" value="1">힌트 1</button>
+      <button class="btn sec" value="2">힌트 2</button>
+      <button class="btn thi" value="3">힌트 3</button>
+      <button class="btn fou" value="4">힌트 4</button>
+      <button class="btn fif" value="5">힌트 5</button>
+    </div>
+    <input class="user" />
+    <button class="check">정답</button>
+    <span class="result"></span>
+    <script>
+      const btns = document.querySelectorAll('.btn');
+      const view = document.querySelector('.view');
+      const user = document.querySelector('.user');
+      const check = document.querySelector('.check');
+      const result = document.querySelector('.result');
+
+      let random = Math.floor(Math.random() * 6);
+      let str = '';
+      let keyValue = '';
+
+      console.log(random);
+
+      btns.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          const className = e.target.classList;
+          const num = e.target.value;
+          str = showUp(num);
+          className.add('active');
+          e.target.innerHTML = `${str}`;
+        });
+      });
+
+      check.addEventListener('click', (e) => {
+        let target = e.target;
+        reStart(target);
+        if (keyValue === quizs[random].ans) {
+          result.innerHTML = `<b>${keyValue}!</b><br>정답입니다!`;
+        } else {
+          result.innerHTML = `틀렸어요!<br>정답은 <b>${quizs[random].ans}!</b>`;
+        }
+      });
+
+      user.addEventListener('keyup', (e) => {
+        keyValue = e.target.value;
+      });
+
+      function showUp(number) {
+        switch (number) {
+          case '1':
+            return quizs[random].hint1;
+            break;
+          case '2':
+            return quizs[random].hint2;
+            break;
+          case '3':
+            return quizs[random].hint3;
+            break;
+          case '4':
+            return quizs[random].hint4;
+            break;
+          case '5':
+            return quizs[random].hint5;
+            break;
+        }
+      }
+
+      function reStart(target) {
+        target.innerHTML = '재시작';
+        target.addEventListener('click', (e) => {
+          location.reload();
+        });
+      }
+
+      let quizs = [
+        {
+          hint1: '저는 하얗게 생겼어요',
+          hint2: '저는 때론 높은 산을 못 올라가서 울어요',
+          hint3: '저는 얼음과 물을 잘 다룰 줄 알아요',
+          hint4: '저는 세상이 어두울 정도로 침울할 때가 있어요',
+          hint5: '저는 아주 높은 곳에 살아요',
+          ans: '구름',
+        },
+        {
+          hint1: '저는 뜨거운 것을 싫어해요',
+          hint2: '저는 차가운 것을 좋아해요',
+          hint3: '저는 다채로운 색상을 가졌어요',
+          hint4: '동그랗게.. 네모나게.. 호리병처럼.. 생겼어요',
+          hint5: '저는 달달한 맛이에요',
+          ans: '아이스크림',
+        },
+        {
+          hint1: '저는 새까막게 생겼어요',
+          hint2: '저는 인기가 많아요',
+          hint3: '저를 모르는 사람은 드물어요',
+          hint4: '저는 톡톡 튀는 맛이 있어요',
+          hint5: '저는 빨간색에 담겨있는 경우가 많아요',
+          ans: '코카콜라',
+        },
+        {
+          hint1: '저는 사람에게 꼭 필수적인 요소에요',
+          hint2: '저는 무색이에요',
+          hint3: '저에겐 향이 없어요',
+          hint4: '저는 다양한 곳에 쓰여요',
+          hint5: '소방관과 친해요',
+          ans: '물',
+        },
+        {
+          hint1: '저는 중국에서 태어났어요',
+          hint2: '저는 달달한 맛이 나요',
+          hint3: 'MZ세대에게 인기를 톡톡히 보고 있어요',
+          hint4: '저는 다양한 과일로 이루어져있어요',
+          hint5: '저는 설탕으로 뒤덮여있어요',
+          ans: '탕후루',
+        },
+        {
+          hint1: '저는 동그랗게 생겼어요',
+          hint2: '과거에는 저를 네모로 생각했대요',
+          hint3: '저의 모습을 실제로 직접 보긴 힘들어요',
+          hint4: '저의 형제가 있는데, 저는 셋째에요',
+          hint5: '저는 달과 절친이에요',
+          ans: '지구',
+        },
+      ];
+    </script>
+  </body>
+</html>

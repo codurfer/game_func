@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>카운터 체크</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      button {
+        width: 80px;
+        height: 40px;
+        border: none;
+        border-radius: 10%;
+        margin: 40px 10px;
+        padding: 10px;
+        color: white;
+        background-color: rgb(0, 0, 0);
+      }
+      button:hover {
+        background-color: rgb(71, 71, 71);
+      }
+      .number {
+        font-size: 80px;
+        font-weight: bold;
+        margin: 0px;
+      }
+      .up {
+        background-color: rgb(56, 132, 225);
+      }
+      .up:hover {
+        background-color: rgb(36, 85, 146);
+      }
+      .down {
+        background-color: rgb(232, 15, 88);
+      }
+      .down:hover {
+        background-color: rgb(154, 11, 59);
+      }
+      .back {
+        margin: 0;
+        background-color: gray;
+      }
+      .back:hover {
+        background-color: rgb(203, 203, 203);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>카운터 체크</h1>
+    <p class="number">0</p>
+    <div>
+      <button class="btn up">플러스</button>
+      <button class="btn reset">초기화</button>
+      <button class="btn down">마이너스</button>
+    </div>
+    <button class="btn back" onclick="location.href = '../index.html'">
+      뒤로가기
+    </button>
+    <script>
+      const num = document.querySelector('.number');
+      const btns = document.querySelectorAll('.btn');
+
+      let countNum = 0;
+
+      btns.forEach((item) => {
+        item.addEventListener('click', (e) => {
+          const style = e.currentTarget.classList;
+          if (style.contains('up')) {
+            countNum++;
+          } else if (style.contains('down')) {
+            countNum--;
+          } else if (style.contains('reset')) {
+            let select = confirm(
+              `현재 카운트는 ${countNum}입니다. \n초기화 하겠습니까?`
+            );
+            if (select) {
+              alert('초기화 되었습니다.');
+              countNum = 0;
+            } else countNum;
+          }
+
+          if (countNum < 0) {
+            num.style.color = 'rgb(232, 15, 88)';
+          } else if (countNum > 0) {
+            num.style.color = 'rgb(56, 132, 225)';
+          } else num.style.color = 'black';
+
+          num.textContent = countNum;
+        });
+      });
+    </script>
+  </body>
+</html>

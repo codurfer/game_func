@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>스톱워치</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100dvh;
+      }
+      span {
+        font-size: 100px;
+      }
+      .viewContainer {
+        padding: 60px 100px;
+        background-color: coral;
+        color: white;
+      }
+      .btnContainer {
+        margin: 20px;
+      }
+      button {
+        border-radius: 15%;
+        padding: 20px;
+        border: none;
+        color: white;
+        font-weight: bold;
+      }
+      .mil {
+        font-size: 40px;
+      }
+      .start {
+        background-color: rgb(45, 109, 230);
+      }
+      .start:hover {
+        background-color: rgb(25, 61, 129);
+      }
+      .start:disabled {
+        background-color: rgb(138, 165, 216);
+      }
+      .pause {
+        background-color: rgb(198, 17, 92);
+      }
+      .pause:hover {
+        background-color: rgb(118, 11, 56);
+      }
+      .pause:disabled {
+        background-color: rgb(236, 58, 132);
+      }
+      .reset {
+        background-color: rgb(69, 69, 69);
+      }
+      .reset:hover {
+        background-color: rgb(0, 0, 0);
+      }
+      .reset:disabled {
+        background-color: rgb(117, 116, 116);
+      }
+      .back {
+        background-color: rgb(51, 203, 51);
+      }
+      .back:hover {
+        background-color: rgb(122, 193, 122);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>스톱워치</h1>
+    <div class="viewContainer">
+      <span class="view">0:00:00</span>
+      <span class="mil">/00</span>
+    </div>
+    <div class="btnContainer">
+      <button class="btn start" id="start">시작</button>
+      <button class="btn pause" id="pause" disabled="true">일시정지</button>
+      <button class="btn reset" id="reset" disabled="true">초기화</button>
+    </div>
+    <button class="back" onclick="location.href = '../index.html'">뒤로</button>
+    <script>
+      const view = document.querySelector('.view');
+      const milView = document.querySelector('.mil');
+      const back = document.querySelector('.back');
+      const btns = document.querySelectorAll('.btn');
+      let interval;
+      let hou = 0;
+      let min = 0;
+      let sec = 0;
+      let mil = 0;
+
+      function format(item) {
+        if (item < 10) {
+          return (item = `0${item}`);
+        }
+        return item;
+      }
+
+      btns.forEach((item) => {
+        item.addEventListener('click', (e) => {
+          const set = e.currentTarget.classList;
+
+          if (set.contains('reset')) {
+            clearInterval(interval);
+            hou = 0;
+            min = 0;
+            sec = 0;
+            mil = 0;
+            showTime();
+            document.getElementById('start').disabled = false;
+            document.getElementById('pause').disabled = true;
+            document.getElementById('reset').disabled = true;
+          } else if (set.contains('start')) {
+            interval = setInterval(getTime, 10);
+            document.getElementById('start').disabled = true;
+            document.getElementById('pause').disabled = false;
+            document.getElementById('reset').disabled = false;
+          } else {
+            clearInterval(interval);
+            document.getElementById('start').disabled = false;
+            document.getElementById('pause').disabled = true;
+            document.getElementById('reset').disabled = false;
+          }
+        });
+      });
+
+      function getTime() {
+        mil++;
+        if (mil == 100) {
+          mil = 0;
+          sec++;
+          if (sec > 59) {
+            console.log('sec 값은 : ' + sec);
+            sec = 0;
+            min++;
+            if (min > 59) {
+              min = 0;
+              hou++;
+            } else min;
+          } else sec;
+        } else mil;
+
+        showTime();
+      }
+
+      function showTime() {
+        view.innerText = `${hou}:${format(min)}:${format(sec)}`;
+        milView.innerText = `/${format(mil)}`;
+      }
+    </script>
+  </body>
+</html>

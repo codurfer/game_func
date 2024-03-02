@@ -45,6 +45,16 @@
         margin: 15px;
         text-align: center;
       }
+      .select {
+        display: flex;
+        float: left;
+      }
+      .check {
+        margin: 10px;
+      }
+      .back {
+        margin: 10px;
+      }
     </style>
   </head>
   <body>
@@ -58,10 +68,12 @@
       <button class="btn fif" value="5">힌트 5</button>
     </div>
     <input class="user" />
-    <button class="check">정답</button>
-    <button class="back" onclick="location.href = '../index.html'">
-      뒤로가기
-    </button>
+    <div class="select">
+      <button class="check">정답</button>
+      <button class="back" onclick="location.href = '../index.html'">
+        뒤로가기
+      </button>
+    </div>
     <span class="result"></span>
 
     <script>
@@ -89,11 +101,14 @@
 
       check.addEventListener('click', (e) => {
         let target = e.target;
-        reStart(target);
-        if (keyValue === quizs[random].ans) {
+        if (keyValue === '') {
+          alert('답을 입력하세요!');
+        } else if (keyValue === quizs[random].ans) {
           result.innerHTML = `<b>${keyValue}!</b><br>정답입니다!`;
+          check.textContent = '다시하기';
         } else {
           result.innerHTML = `틀렸어요!<br>정답은 <b>${quizs[random].ans}!</b>`;
+          check.textContent = '다시하기';
         }
       });
 
@@ -121,13 +136,6 @@
         }
       }
 
-      function reStart(target) {
-        target.innerHTML = '재시작';
-        target.addEventListener('click', (e) => {
-          location.reload();
-        });
-      }
-
       let quizs = [
         {
           hint1: '저는 하얗게 생겼어요',
@@ -150,7 +158,7 @@
           hint2: '저는 인기가 많아요',
           hint3: '저를 모르는 사람은 드물어요',
           hint4: '저는 톡톡 튀는 맛이 있어요',
-          hint5: '저는 빨간색에 담겨있는 경우가 많아요',
+          hint5: '저는 전세계에서 볼 수 있어요',
           ans: '코카콜라',
         },
         {

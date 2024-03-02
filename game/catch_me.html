@@ -15,8 +15,8 @@
       }
       .view {
         position: relative;
-        width: 800px;
-        height: 500px;
+        width: 380px;
+        height: 600px;
         border: solid gray;
       }
       .btn {
@@ -49,7 +49,7 @@
         display: none;
       }
       .time {
-        margin: 20px;
+        margin: 10px;
         font-size: 25px;
       }
       .result {
@@ -58,9 +58,9 @@
       .result.show {
         display: block;
         font-weight: bold;
+        margin: 5px;
       }
       .back {
-        margin: 15px;
         display: block;
         width: 80px;
         height: 50px;
@@ -111,7 +111,6 @@
       function timeLimit() {
         if (mil === 100) {
           mil = 0;
-          console.log(count);
           if (sec == 30) {
             clearInterval(timeInter);
             clearInterval(gameInter);

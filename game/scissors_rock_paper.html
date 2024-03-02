@@ -42,8 +42,8 @@
         font-size: 28px;
         font-weight: bold;
         background-color: cornflowerblue;
-        width: 90px;
-        height: 90px;
+        width: 120px;
+        height: 120px;
       }
       .start:hover {
         background-color: rgb(45, 111, 233);
@@ -59,8 +59,8 @@
         font-size: 28px;
         font-weight: bold;
         background-color: rgb(73, 80, 95);
-        width: 90px;
-        height: 90px;
+        width: 120px;
+        height: 120px;
       }
       .back:hover {
         background-color: rgb(36, 39, 46);
@@ -115,9 +115,7 @@
     </div>
     <div class="btn-cotainer">
       <button class="start">시작</button>
-      <button class="back" onclick="location.href = '../index.html'">
-        뒤로가기
-      </button>
+      <button class="back" onclick="location.href = '../index.html'"></button>
     </div>
     <script>
       const start = document.querySelector('.start');
@@ -126,6 +124,8 @@
       const select = document.querySelector('.select');
       const btns = document.querySelectorAll('.btn');
       const imgResult = document.querySelector('.imgResult');
+      const back = document.querySelector('.back');
+      back.innerText = `뒤로\n가기`;
 
       const imgCom = document.createElement('img');
       const imgUser = document.createElement('img');
@@ -201,7 +201,7 @@
 
       function gameOff() {
         start.classList.remove('on');
-        start.textContent = '다시시작';
+        start.innerText = '다시\n시작';
         select.classList.remove('on');
         view.classList.remove('on');
       }

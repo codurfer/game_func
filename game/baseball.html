@@ -11,6 +11,9 @@
         justify-content: center;
         align-items: center;
       }
+      h1 {
+        font-size: 50px;
+      }
       .number-content {
         display: none;
       }
@@ -19,7 +22,7 @@
         flex-direction: row;
         text-align: center;
         margin: 5px;
-        line-height: 45px;
+        line-height: 145px;
       }
       .result {
         text-align: center;
@@ -27,18 +30,22 @@
       }
       .num {
         margin: 10px;
-        width: 50px;
-        height: 50px;
+        width: 150px;
+        height: 150px;
         border: none;
+        border-radius: 15%;
+        font-size: 40px;
         font-weight: bold;
         color: white;
         background-color: rgb(233, 67, 67);
       }
       .num.ans {
         margin: 10px;
-        width: 50px;
-        height: 50px;
+        width: 150px;
+        height: 150px;
         border: none;
+        border-radius: 15%;
+        font-size: 40px;
         font-weight: bold;
         color: white;
         background-color: rgb(86, 160, 220);
@@ -47,9 +54,13 @@
         display: none;
       }
       .user.active {
+        margin: 10px;
         display: block;
+        border-radius: 7px;
         text-align: center;
-        width: 60px;
+        width: 180px;
+        height: 100px;
+        font-size: 90px;
       }
       .start.hide {
         display: none;
@@ -63,10 +74,11 @@
       .btn {
         display: block;
         margin: 10px;
-        width: 70px;
+        width: 120px;
+        height: 80px;
+        font-size: 40px;
         font-weight: bold;
         color: white;
-        height: 30px;
         border: none;
         border-radius: 5%;
         background-color: rgb(119, 154, 22);
@@ -87,11 +99,76 @@
         display: flex;
         float: left;
       }
+      .list {
+        font-size: 40px;
+      }
 
       input::-webkit-outer-spin-button,
       input::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
+      }
+
+      @media (max-width: 430px) {
+        h1 {
+          font-size: 30px;
+        }
+        .number-content.active {
+          display: flex;
+          flex-direction: row;
+          text-align: center;
+          margin: 5px;
+          line-height: 80px;
+        }
+        .num {
+          margin: 10px;
+          width: 80px;
+          height: 80px;
+          border: none;
+          border-radius: 15%;
+          font-size: 40px;
+          font-weight: bold;
+          color: white;
+          background-color: rgb(233, 67, 67);
+        }
+        .num.ans {
+          margin: 10px;
+          width: 80px;
+          height: 80px;
+          border: none;
+          border-radius: 15%;
+          font-size: 40px;
+          font-weight: bold;
+          color: white;
+          background-color: rgb(86, 160, 220);
+        }
+        .user.active {
+          margin: 10px;
+          display: block;
+          border-radius: 7px;
+          text-align: center;
+          width: 80px;
+          height: 40px;
+          font-size: 30px;
+        }
+        .btn {
+          display: block;
+          margin: 10px;
+          width: 90px;
+          height: 50px;
+          font-size: 30px;
+          font-weight: bold;
+          color: white;
+          border: none;
+          border-radius: 5%;
+          background-color: rgb(119, 154, 22);
+        }
+        .back {
+          background-color: rgb(139, 139, 139);
+        }
+        .list {
+          font-size: 20px;
+        }
       }
     </style>
   </head>

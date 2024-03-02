@@ -53,7 +53,7 @@ let menu = [
     title: '야구볼 게임',
     category: 'game',
     href: './game/baseball.html',
-    img: 'img/baseball.jpg',
+    img: '../img/baseball.jpg',
     desc: `3개의 숫자를 맞추는 게임!`,
   },
   {
@@ -69,7 +69,7 @@ let menu = [
     title: '카운터 체크',
     category: 'function',
     href: './functio/count_check.html',
-    img: 'img/count_check.jpg',
+    img: './img/count_check.jpg',
     desc: `마우스 클릭 한번으로 숫자를 세보세요!`,
   },
   {

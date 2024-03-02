@@ -112,10 +112,10 @@
       function timeLimit() {
         if (mil === 100) {
           mil = 0;
-          if (sec == 30) {
+          if (sec == 15) {
             clearInterval(timeInter);
             clearInterval(gameInter);
-            result.innerHTML = `30초 동안 누른 버튼의 수는 ${count}개 입니다.`;
+            result.innerHTML = `15초 동안 누른 버튼의 수는 ${count}개 입니다.`;
             start.classList.remove('end');
             start.textContent = '다시시작';
             result.classList.add('show');
@@ -125,7 +125,7 @@
         } else {
           mil++;
         }
-        time.innerHTML = `남은시간: ${30 - sec}초`;
+        time.innerHTML = `남은시간: ${15 - sec}초`;
       }
 
       function startGame() {

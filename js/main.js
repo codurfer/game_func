@@ -53,7 +53,7 @@ let menu = [
     title: '야구볼 게임',
     category: 'game',
     href: './game/baseball.html',
-    img: '../img/baseball.jpg',
+    img: './img/baseball.jpg',
     desc: `3개의 숫자를 맞추는 게임!`,
   },
   {

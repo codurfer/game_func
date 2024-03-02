@@ -53,7 +53,7 @@ let menu = [
     title: '야구볼 게임',
     category: 'game',
     href: './game/baseball.html',
-    img: './img/baseball.jpg',
+    img: 'img/baseball.jpg',
     desc: `3개의 숫자를 맞추는 게임!`,
   },
   {
@@ -61,7 +61,7 @@ let menu = [
     title: '로또 추첨',
     category: 'function',
     href: './functio/lotte.html',
-    img: './img/lotte.jpg',
+    img: 'img/lotte.jpg',
     desc: `매주 토요일 저녁엔 내가 부자가 될지도?!`,
   },
   {
@@ -69,7 +69,7 @@ let menu = [
     title: '카운터 체크',
     category: 'function',
     href: './functio/count_check.html',
-    img: './img/count_check.jpg',
+    img: 'img/count_check.jpg',
     desc: `마우스 클릭 한번으로 숫자를 세보세요!`,
   },
   {
@@ -77,7 +77,7 @@ let menu = [
     title: '버튼을 누르자!',
     category: 'game',
     href: './game/catch_me.html',
-    img: './img/catch_me.jpg',
+    img: 'img/catch_me.jpg',
     desc: `30초 동안 많은 버튼을 누르는 간단한 게임!`,
   },
   {
@@ -85,7 +85,7 @@ let menu = [
     title: '가위바위보',
     category: 'game',
     href: './game/scissors_rock_paper.html',
-    img: './img/scissors_rock_paper.jpg',
+    img: 'img/scissors_rock_paper.jpg',
     desc: `가장 간단한 가위 바위 보! 상대는 컴퓨터!!`,
   },
   {
@@ -93,7 +93,7 @@ let menu = [
     title: '스톱워치',
     category: 'function',
     href: './functio/stopwatch.html',
-    img: './img/stopwatch.jpg',
+    img: 'img/stopwatch.jpg',
     desc: `편리한 시계 체크! 스톱워치와 함께~`,
   },
   {
@@ -101,15 +101,15 @@ let menu = [
     title: '다섯고개',
     category: 'game',
     href: './game/five.html',
-    img: './img/five.jpg',
+    img: 'img/five.jpg',
     desc: `5번의 힌트만 보고 답을 맞춰야한다!`,
   },
   {
     id: 8,
     title: '랜덤박스',
     category: 'function',
-    href: './functio/random_box.html',
-    img: './img/random_box.jpg',
+    href: 'functio/random_box.html',
+    img: 'img/random_box.jpg',
     desc: `5개의 박스 중 당첨은 하나!!`,
   },
 ];

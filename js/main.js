@@ -179,4 +179,12 @@ let menu = [
     img: 'https://github.com/codurfer/game_func/blob/master/img/random_box.JPG?raw=true',
     desc: `6개의 박스 중 당첨은 하나!!`,
   },
+  {
+    id: 9,
+    title: '타입스톱',
+    category: 'game',
+    href: './game/timestop.html',
+    img: 'https://github.com/codurfer/game_func/blob/master/img/timestop.JPG?raw=true',
+    desc: `10초 혹은 20초에 멈추세요!!`,
+  },
 ];

@@ -12,7 +12,7 @@
         align-items: center;
       }
       .time {
-        font-size: 50px;
+        font-size: 90px;
       }
       .btn-container {
         display: flex;
@@ -25,15 +25,14 @@
       .clock.active {
         display: inline-block;
         text-align: center;
-        line-height: 90px;
-        width: 300px;
-        height: 100px;
+        line-height: 300px;
+        width: 700px;
+        height: 300px;
         margin: 10px;
         background-color: rgb(237, 193, 139);
       }
       .milli {
-        right: -10px;
-        font-size: 20px;
+        font-size: 35px;
       }
       .btn {
         margin: 5px;
@@ -92,7 +91,21 @@
         display: flex;
         text-align: center;
       }
+      .back {
+        width: 90px;
+        height: 30px;
+        font-weight: bold;
+      }
       @media (max-width: 430px) {
+        .clock.active {
+          display: inline-block;
+          text-align: center;
+          line-height: 90px;
+          width: 300px;
+          height: 100px;
+          margin: 10px;
+          background-color: rgb(237, 193, 139);
+        }
         .btn {
           margin: 5px;
           width: 80px;
@@ -105,6 +118,12 @@
         }
         .result {
           margin: 5px;
+          font-size: 20px;
+        }
+        .time {
+          font-size: 45px;
+        }
+        .milli {
           font-size: 20px;
         }
       }
@@ -126,6 +145,9 @@
       <button class="btn reStart">재시작</button>
     </div>
     <span class="result"></span>
+    <button class="back" onclick="location.href = '../index.html'">
+      뒤로가기
+    </button>
     <script>
       const info = document.querySelector('.info');
       const milli = document.querySelector('.milli');
@@ -157,12 +179,12 @@
             clock.classList.add('active');
             secondTo();
             stopTo();
-            interval = setInterval(timeStart, 10);
+            interval = setInterval(timeStart, 1);
           } else if (cName.contains('secret')) {
             info.textContent = `${setSec}초, 비공개! 타이머가 작동합니다.`;
             secondTo();
             stopTo();
-            interval = setInterval(timeStart, 10);
+            interval = setInterval(timeStart, 1);
           } else if (cName.contains('stop')) {
             checkTime();
             clearInterval(interval);

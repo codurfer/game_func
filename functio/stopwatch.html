@@ -16,7 +16,10 @@
         font-size: 120px;
       }
       .viewContainer {
-        padding: 80px 150px;
+        text-align: center;
+        line-height: 280px;
+        width: 900px;
+        height: 300px;
         background-color: coral;
         color: white;
       }
@@ -72,7 +75,10 @@
           font-size: 100px;
         }
         .viewContainer {
-          padding: 80px 150px;
+          text-align: center;
+          line-height: 230px;
+          width: 650px;
+          height: 250px;
           background-color: coral;
           color: white;
         }
@@ -83,7 +89,10 @@
           font-size: 45px;
         }
         .viewContainer {
-          padding: 20px 70px;
+          text-align: center;
+          line-height: 95px;
+          width: 300px;
+          height: 100px;
           background-color: coral;
           color: white;
         }
@@ -138,7 +147,7 @@
             document.getElementById('pause').disabled = true;
             document.getElementById('reset').disabled = true;
           } else if (set.contains('start')) {
-            interval = setInterval(getTime, 10);
+            interval = setInterval(getTime, 1);
             document.getElementById('start').disabled = true;
             document.getElementById('pause').disabled = false;
             document.getElementById('reset').disabled = false;

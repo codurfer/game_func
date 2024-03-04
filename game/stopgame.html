@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>타임 스톱</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .time {
+        font-size: 50px;
+      }
+      .btn-container {
+        display: flex;
+        float: left;
+      }
+      .clock {
+        display: none;
+      }
+      .clock.active {
+        display: inline-block;
+        text-align: center;
+        line-height: 280px;
+        width: 700px;
+        height: 300px;
+        background-color: rgb(237, 193, 139);
+      }
+      .milli {
+        font-size: 20px;
+      }
+      .btn {
+        margin: 5px;
+      }
+      .ten {
+        display: block;
+      }
+      .ten.active {
+        display: none;
+      }
+      .twenty {
+        display: block;
+      }
+      .twenty.active {
+        display: none;
+      }
+      .open {
+        display: none;
+      }
+      .open.active {
+        display: block;
+      }
+      .secret {
+        display: none;
+      }
+      .secret.active {
+        display: block;
+      }
+      .stop {
+        display: none;
+      }
+      .stop.active {
+        display: block;
+      }
+      .reStart {
+        display: none;
+      }
+      .reStart.active {
+        display: block;
+      }
+      .result {
+        display: none;
+      }
+      .result.active {
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>타임 스톱</h1>
+    <span class="info">멈출 초를 정해주세요.</span>
+    <section class="clock">
+      <span class="time second">00</span>
+      <span class="time milli">/00</span>
+    </section>
+    <div class="btn-container">
+      <button class="btn ten">10초</button>
+      <button class="btn twenty">20초</button>
+      <button class="btn open">공개</button>
+      <button class="btn secret">비공개</button>
+      <button class="btn stop">스톱</button>
+      <button class="btn reStart">재시작</button>
+    </div>
+    <span class="result"></span>
+    <script>
+      const info = document.querySelector('.info');
+      const milli = document.querySelector('.milli');
+      const second = document.querySelector('.second');
+      const btns = document.querySelectorAll('.btn');
+      const result = document.querySelector('.result');
+      const clock = second.parentElement;
+      let interval;
+      let mil = 0;
+      let sec = 0;
+
+      let setSec = 0;
+
+      btns.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          const cName = e.target.classList;
+          if (cName.contains('ten')) {
+            setSec = 10;
+            info.textContent = `${setSec}초를 선택했습니다. 공개여부를 고르세요!`;
+            firstTo();
+            secondTo();
+          } else if (cName.contains('twenty')) {
+            setSec = 20;
+            info.textContent = `${setSec}초를 선택했습니다. 공개여부를 고르세요!`;
+            firstTo();
+            secondTo();
+          } else if (cName.contains('open')) {
+            info.textContent = `${setSec}초, 공개! 타이머가 작동합니다.`;
+            clock.classList.add('active');
+            secondTo();
+            stopTo();
+            interval = setInterval(timeStart, 10);
+          } else if (cName.contains('secret')) {
+            info.textContent = `${setSec}초, 비공개! 타이머가 작동합니다.`;
+            secondTo();
+            stopTo();
+            interval = setInterval(timeStart, 10);
+          } else if (cName.contains('stop')) {
+            checkTime();
+            clearInterval(interval);
+          }
+        });
+      });
+
+      function timeStart() {
+        info.textContent = `타이머가 작동중입니다.`;
+        mil++;
+        if (mil === 100) {
+          mil = 0;
+          sec++;
+          if (sec === 60) {
+            alert('60초가 넘었습니다.');
+            clearInterval(interval);
+          }
+        }
+
+        milli.innerHTML = format(mil);
+        second.innerHTML = format(sec);
+      }
+
+      function format(num) {
+        if (num <= 9) {
+          return `0${num}`;
+        } else return num;
+      }
+
+      function checkTime() {
+        if (sec === setSec) {
+          result.innerText = `${setSec}초에 멈추셨네요!`;
+          stopTo();
+          reStartTo();
+        } else if (sec > setSec) {
+          result.innerText = `${setSec}초 초과에요!!.\n오차:${setSec - sec}`;
+          stopTo();
+          reStartTo();
+        } else {
+          result.innerText = `${setSec}초 미만이에요!!.\n오차:${setSec - sec}`;
+          stopTo();
+          reStartTo();
+        }
+      }
+
+      function firstTo() {
+        document.querySelector('.ten').classList.toggle('active');
+        document.querySelector('.twenty').classList.toggle('active');
+      }
+
+      function secondTo() {
+        document.querySelector('.open').classList.toggle('active');
+        document.querySelector('.secret').classList.toggle('active');
+      }
+
+      function stopTo() {
+        document.querySelector('.stop').classList.toggle('active');
+      }
+
+      function reStartTo() {
+        document.querySelector('.reStart').classList.toggle('active');
+      }
+    </script>
+  </body>
+</html>

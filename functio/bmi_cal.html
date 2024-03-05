@@ -24,6 +24,7 @@
         text-align: center;
         width: 130px;
         height: 40px;
+        font-size: 18px;
       }
       label {
         margin-bottom: 20px;
@@ -57,6 +58,21 @@
       }
       .resIn {
         margin: 0;
+      }
+      .row {
+        color: rgb(68, 68, 215);
+      }
+      .fin {
+        color: rgb(188, 191, 8);
+      }
+      .lit {
+        color: rgb(227, 133, 25);
+      }
+      .ove {
+        color: rgb(152, 29, 64);
+      }
+      .dan {
+        color: rgb(255, 0, 0);
       }
     </style>
   </head>
@@ -113,19 +129,20 @@
       }
 
       function bmiCal() {
-        bmi = (userWei.value / (userHei.value / 100)) * 2;
+        console.log(userHei.value / 100);
+        bmi = userWei.value / ((userHei.value / 100) * 2);
         if (bmi < 18.5) {
-          bmiRe = '저체중';
+          bmiRe = `<b class="row">'저체중'</b>`;
         } else if (bmi < 23) {
-          bmiRe = '정상';
+          bmiRe = `<b>'정상'</b>`;
         } else if (bmi < 25) {
-          bmiRe = '과체중';
+          bmiRe = `<b class="fin">'과체중'</b>`;
         } else if (bmi < 30) {
-          bmiRe = '경도비만';
+          bmiRe = `<b class="lit">'경도비만'</b>`;
         } else if (bmi < 35) {
-          bmiRe = '중도비만';
+          bmiRe = `<b class="ove">'중도비만'</b>`;
         } else if (35 < bmi) {
-          bmiRe = '고도비만';
+          bmiRe = `<b class="dan">'고도비만'</b>`;
         }
       }
     </script>

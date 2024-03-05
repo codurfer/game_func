@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI 계산기</title>
+    <style>
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .userInfo {
+        width: 220px;
+      }
+      .inCss {
+        margin: 5px;
+        text-align: center;
+        width: 130px;
+        height: 40px;
+      }
+      label {
+        margin-bottom: 20px;
+        margin-right: 20px;
+        font-size: 19px;
+      }
+      .weiLab {
+        margin-right: 1px;
+      }
+      .btn {
+        display: inline-block;
+        margin: 10px 0;
+        width: 90px;
+        height: 40px;
+        border: none;
+        border-radius: 20px;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        background-color: black;
+      }
+      .back {
+        width: 120px;
+      }
+      .result {
+        text-align: left;
+        margin-top: 20px;
+      }
+      .resTit {
+        text-align: center;
+      }
+      .resIn {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>BMI 측정해보세요!</h1>
+    <form class="userInfo">
+      <label>이름</label>
+      <input class="inCss userName" type="text" /><br />
+      <label>신장</label>
+      <input class="inCss userHei" type="number" /><br />
+      <label class="weiLab">몸무게</label>
+      <input class="inCss userWei" type="number" /><br />
+      <label>성별</label>
+      <input type="radio" value="남성" name="gender" />남성
+      <input type="radio" value="여성" name="gender" />여성
+      <br />
+    </form>
+    <div>
+      <button class="btn cal">계산</button>
+      <button class="btn back" onclick="location.href = '../index.html'">
+        뒤로가기
+      </button>
+    </div>
+    <div class="result"></div>
+    <script>
+      const result = document.querySelector('.result');
+      const userName = document.querySelector('.userName');
+      const userHei = document.querySelector('.userHei');
+      const userWei = document.querySelector('.userWei');
+      const cal = document.querySelector('.cal');
+      let userChe = document.getElementsByName('gender');
+      let userGen, bmi, bmiRe;
+
+      cal.addEventListener('click', (e) => {
+        console.log(cheRid());
+        bmiCal();
+        result.innerHTML = `
+      <h2 class="resTit">결과</h2>
+      <span class="resIn">이름: ${userName.value}</span><br />
+      <span class="resIn">신장: ${userHei.value}cm</span><br />
+      <span class="resIn">몸무게: ${userWei.value}kg</span><br />
+      <span class="resIn">성별: ${userGen}</span><br />
+      <span class="resIn">BMI: ${bmi.toFixed(
+        2
+      )}으로 ${bmiRe}에 해당합니다.</span>`;
+      });
+
+      function cheRid() {
+        userChe.forEach((item) => {
+          if (item.checked) {
+            userGen = item.value;
+          }
+        });
+      }
+
+      function bmiCal() {
+        bmi = (userWei.value / (userHei.value / 100)) * 2;
+        if (bmi < 18.5) {
+          bmiRe = '저체중';
+        } else if (bmi < 23) {
+          bmiRe = '정상';
+        } else if (bmi < 25) {
+          bmiRe = '과체중';
+        } else if (bmi < 30) {
+          bmiRe = '경도비만';
+        } else if (bmi < 35) {
+          bmiRe = '중도비만';
+        } else if (35 < bmi) {
+          bmiRe = '고도비만';
+        }
+      }
+    </script>
+  </body>
+</html>

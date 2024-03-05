@@ -187,4 +187,12 @@ let menu = [
     img: 'https://github.com/codurfer/game_func/blob/master/img/timestop.JPG?raw=true',
     desc: `10초 혹은 20초에 멈추세요!!`,
   },
+  {
+    id: 10,
+    title: 'BMI 계산기',
+    category: 'function',
+    href: './functio/bmi_cal.html',
+    img: 'https://github.com/codurfer/game_func/blob/master/img/bmi_cal.JPG?raw=true',
+    desc: `나의 신체질량지수는 몇일까??!`,
+  },
 ];

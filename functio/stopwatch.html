@@ -147,7 +147,7 @@
             document.getElementById('pause').disabled = true;
             document.getElementById('reset').disabled = true;
           } else if (set.contains('start')) {
-            interval = setInterval(getTime, 1);
+            interval = setInterval(getTime, 10);
             document.getElementById('start').disabled = true;
             document.getElementById('pause').disabled = false;
             document.getElementById('reset').disabled = false;

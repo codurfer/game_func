@@ -179,12 +179,12 @@
             clock.classList.add('active');
             secondTo();
             stopTo();
-            interval = setInterval(timeStart, 1);
+            interval = setInterval(timeStart, 10);
           } else if (cName.contains('secret')) {
             info.textContent = `${setSec}초, 비공개! 타이머가 작동합니다.`;
             secondTo();
             stopTo();
-            interval = setInterval(timeStart, 1);
+            interval = setInterval(timeStart, 10);
           } else if (cName.contains('stop')) {
             checkTime();
             clearInterval(interval);

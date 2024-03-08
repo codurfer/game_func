@@ -195,4 +195,12 @@ let menu = [
     img: 'https://github.com/codurfer/game_func/blob/master/img/bmi_cal.JPG?raw=true',
     desc: `나의 신체질량지수는 몇일까??!`,
   },
+  {
+    id: 11,
+    title: 'UP & DOWN',
+    category: 'game',
+    href: './game/up_down.html',
+    img: 'https://github.com/codurfer/game_func/blob/master/img/up_down.JPG?raw=true',
+    desc: `나의 신체질량지수는 몇일까??!`,
+  },
 ];

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>업다운게임</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100dvh;
+      }
+      .view {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 600px;
+        height: 300px;
+        background-color: rgb(228, 236, 85);
+      }
+      .info {
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .start {
+        margin: 15px;
+        width: 100px;
+        height: 100px;
+        color: white;
+        border: none;
+        font-size: 35px;
+        border-radius: 50%;
+        background-color: rgb(56, 72, 67);
+      }
+      .start:hover {
+        background-color: rgb(85, 108, 101);
+      }
+      .start.end {
+        display: none;
+      }
+      .userValue {
+        display: none;
+      }
+      .userValue.show {
+        display: flex;
+        text-align: center;
+        font-size: 20px;
+        margin: 15px;
+        width: 40px;
+        height: 30px;
+      }
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      .check {
+        display: none;
+      }
+      .check.show {
+        display: block;
+        text-align: center;
+        width: 90px;
+        height: 50px;
+        color: white;
+        border: none;
+        font-size: 30px;
+        border-radius: 5%;
+        background-color: rgb(45, 131, 224);
+      }
+      .result {
+        font-size: 40px;
+        font-weight: bold;
+      }
+      .back {
+        margin: 10px;
+        width: 160px;
+        height: 80px;
+        font-size: 30px;
+        border: none;
+        border-radius: 30px;
+        background-color: rgb(188, 188, 188);
+      }
+
+      @media (max-width: 430px) {
+        .view {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          width: 295px;
+          height: 300px;
+          background-color: rgb(228, 236, 85);
+        }
+        .start {
+          margin: 15px;
+          width: 80px;
+          height: 80px;
+          color: white;
+          border: none;
+          font-size: 25px;
+          border-radius: 50%;
+          background-color: rgb(56, 72, 67);
+        }
+        .result {
+          font-size: 30px;
+          font-weight: bold;
+        }
+        .back {
+          margin: 10px;
+          width: 90px;
+          height: 35px;
+          font-size: 15px;
+          border: none;
+          border-radius: 30px;
+        }
+        .check.show {
+          display: block;
+          text-align: center;
+          width: 60px;
+          height: 35px;
+          color: white;
+          border: none;
+          font-size: 20px;
+          border-radius: 5%;
+          background-color: rgb(45, 131, 224);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>업다운게임</h1>
+    <div class="view">
+      <label class="result"></label>
+      <label class="info">시작버튼을 누르세요!</label>
+    </div>
+    <button class="start">시작</button>
+    <input type="number" class="userValue" oninput="maxlen(this, 2)" />
+    <input type="button" class="check" />
+    <button class="back" onclick="location.href = '../index.html'">
+      뒤로가기
+    </button>
+    <script>
+      const start = document.querySelector('.start');
+      const info = document.querySelector('.info');
+      const userValue = document.querySelector('.userValue');
+      const check = document.querySelector('.check');
+      const result = document.querySelector('.result');
+      let guessNum = 0;
+      let count = 0;
+
+      function maxlen(num, maxlen) {
+        if (num.value.length > maxlen) {
+          num.value = num.value.substr(0, maxlen);
+        }
+      }
+
+      start.addEventListener('click', (e) => {
+        e.target.classList.add('end');
+        numRan();
+        show();
+      });
+
+      check.addEventListener('click', (e) => {
+        if (Number(userValue.value) === guessNum) {
+          result.style.color = 'rgb(224, 45, 111)';
+          result.textContent = 'COGRATULATIONS!';
+          start.classList.remove('end');
+          if (count === 10) {
+            info.innerText = `정답입니다!!!\n한번에 맞쳤어요! 이건 신내림?!`;
+          } else {
+            info.innerText = `정답입니다!!!\n${11 - count}번만에 맞추었어요`;
+          }
+          end();
+        } else if (Number(userValue.value) > guessNum) {
+          count--;
+          result.style.color = 'rgb(25, 49, 205)';
+          result.textContent = 'DOWN';
+          info.innerText = `${userValue.value}보다 작습니다.\n남은 기회 ${count}번`;
+          userValue.value = 'null';
+        } else {
+          count--;
+          result.style.color = 'rgb(205, 25, 25)';
+          result.textContent = 'UP';
+          userValue.value = 'null';
+          info.innerText = `${userValue.value}보다 큽니다.\n남은 기회 ${count}번`;
+        }
+      });
+
+      function numRan() {
+        count = 10;
+        result.textContent = '';
+        userValue.value = '';
+        guessNum = Math.floor(Math.random() * 50) + 1;
+        info.innerText = '숫자를 추측하세요!\n범위는 1~50입니다.';
+        check.value = '확인';
+      }
+
+      function show() {
+        userValue.classList.add('show');
+        check.classList.add('show');
+      }
+
+      function end() {
+        userValue.classList.remove('show');
+        check.classList.remove('show');
+      }
+    </script>
+  </body>
+</html>
